@@ -1,7 +1,8 @@
 # Redux Thunk - Todos Task
 
 ## Task 
-Implement a list of todos with ability to select a user
+Implement a list of todos with ability to select a user.
+- There should always be one blue and one green section on the right and on the left
 - [CodeSandbox](https://codesandbox.io/s/jolly-bartik-qydzc)
 - [Basic markup](https://mate-academy.github.io/redux-thunk_todos-task/)
   

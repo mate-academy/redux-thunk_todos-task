@@ -122,6 +122,15 @@ const App = () => (
 
     <section>
       <div className="content">
+        <p>-</p>
+      </div>
+      <div className="content">
+        <p>-</p>
+      </div>
+    </section>
+
+    <section>
+      <div className="content">
         <div className="loader" />
       </div>
       <div className="content">
