@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const TodoList = ({ todos, showUser }) => (
+import { showUser } from './store';
+
+const TodoList = ({ todos, loadUser }) => (
   <div className="TodoList">
     <strong>Todos:</strong>
 
@@ -18,7 +21,7 @@ const TodoList = ({ todos, showUser }) => (
             {todo.title}
           </label>
 
-          <button type="button" onClick={() => showUser(todo.userId)}>
+          <button type="button" onClick={() => loadUser(todo.userId)}>
             User
             {todo.userId}
           </button>
@@ -28,9 +31,13 @@ const TodoList = ({ todos, showUser }) => (
   </div>
 );
 
-export default TodoList;
+const getMethods = dispatch => ({
+  loadUser: userId => dispatch(showUser(userId)),
+});
+
+export default connect(null, getMethods)(TodoList);
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object).isRequired,
-  showUser: PropTypes.func.isRequired,
+  loadUser: PropTypes.func.isRequired,
 };

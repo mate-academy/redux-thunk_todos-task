@@ -5,7 +5,7 @@ export const getTodos = async() => {
   const response = await fetch(`${API_URL}/todos`);
   const todos = await response.json();
 
-  const getTodoByUserId = userId => todos.find(todo => todo.userId === userId)
+  const getTodoByUserId = userId => todos.find(todo => todo.userId === userId);
 
   return todos.filter(todo => todo === getTodoByUserId(todo.userId));
 };
