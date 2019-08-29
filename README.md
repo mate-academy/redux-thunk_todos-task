@@ -1,7 +1,9 @@
 # Redux Thunk - Todos Task
 
 ## Task 
-Implement a list of todos with ability to select a user 
+Implement a list of todos with ability to select a user
+- [CodeSandbox](https://codesandbox.io/s/jolly-bartik-qydzc)
+- [Basic markup](https://mate-academy.github.io/redux-thunk_todos-task/)
   
 ## Workflow
 - Fork the repository with task

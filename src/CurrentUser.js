@@ -5,10 +5,7 @@ const CurrentUser = ({ user }) => (
   <div className="CurrentUser">
     <strong>Selected user:</strong>
     <ul>
-      <li>
-#
-        {user.id}
-      </li>
+      <li>{`#${user.id}`}</li>
       <li>{user.name}</li>
       <li>{user.email}</li>
       <li>{user.phone}</li>
