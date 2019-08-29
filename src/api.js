@@ -3,8 +3,11 @@ const API_URL = 'https://jsonplaceholder.typicode.com';
 export const getTodos = async() => {
   await wait(2000);
   const response = await fetch(`${API_URL}/todos`);
+  const todos = await response.json();
 
-  return response.json();
+  const getTodoByUserId = userId => todos.find(todo => todo.userId === userId)
+
+  return todos.filter(todo => todo === getTodoByUserId(todo.userId));
 };
 
 export const getUser = async(userId) => {

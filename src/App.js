@@ -2,6 +2,12 @@ import React from 'react';
 
 import CurrentUser from './CurrentUser';
 import TodoList from './TodoList';
+import { getTodos } from './api';
+
+getTodos()
+  .then(todos => {
+    console.log(todos);
+  });
 
 const todos = [
   {
