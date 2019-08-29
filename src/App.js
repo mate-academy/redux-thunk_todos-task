@@ -75,10 +75,12 @@ const App = () => (
 
       <p className="info">User is not selected</p>
     </section>
+
     <section>
       <p className="info">Loading...</p>
       <p className="info">Loading...</p>
     </section>
+
     <section>
       <p className="info">
         Failed loading todos
@@ -90,6 +92,7 @@ const App = () => (
         <button type="button">Reload</button>
       </p>
     </section>
+
     <section>
       <p className="info">
         6 todos are loaded
@@ -101,10 +104,16 @@ const App = () => (
         <button type="button">Clear</button>
       </p>
     </section>
+
     <section>
-      <p className="info">1 todo is loaded</p>
+      <p className="info">
+        1 todo is loaded
+        <button type="button">Clear</button>
+      </p>
+
       <p className="info">User #999 does not exist</p>
     </section>
+
     <section>
       <div className="content">
         <div className="loader" />
@@ -113,6 +122,7 @@ const App = () => (
         <CurrentUser user={currentUser} />
       </div>
     </section>
+
     <section>
       <div className="content">
         <TodoList todos={todos} />
