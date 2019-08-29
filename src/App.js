@@ -116,7 +116,10 @@ class App extends React.Component {
           <section>
             <p className="info">
               Failed loading todos
-              <button type="button">Reload</button>
+              <button
+                type="button"
+                onClick={loadTodos}
+              >Reload</button>
             </p>
 
             <p className="info">
@@ -169,29 +172,34 @@ class App extends React.Component {
     return (
       <main className="App">
         <section>
-          <p className="info">
-            6 todos are loaded
-            <button
-              type="button"
-              onClick={clearTodos}
-            >
-              Clear
-            </button>
-          </p>
+          {todos.length > 1
+            ? (
+              <p className="info">
+                6 todos are loaded
+                <button
+                  type="button"
+                  onClick={clearTodos}
+                >
+                  Clear
+                </button>
+              </p>
+            ) : (
+              <p className="info">
+                1 todo is loaded
+                <button
+                  type="button"
+                  onClick={clearTodos}
+                >
+                  Clear
+                </button>
+              </p>
+            )
+          }
 
           <p className="info">
             User #1 is loaded
             <button type="button">Clear</button>
           </p>
-        </section>
-
-        <section>
-          <p className="info">
-            1 todo is loaded
-            <button type="button">Clear</button>
-          </p>
-
-          <p className="info">User #999 does not exist</p>
         </section>
 
         <section>
