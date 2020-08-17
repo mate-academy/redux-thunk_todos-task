@@ -19,9 +19,14 @@ button:hover {
   border: 2px solid green;
   border-radius: 5px;
   width: 45%;
+  min-height: 200px;
   padding: 5px 10px;
   display: flex;
   align-items: center;
+}
+
+.content--user {
+  max-height: 200px;
 }
 
 .info {

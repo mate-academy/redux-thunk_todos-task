@@ -1,5 +1,5 @@
 {
-  "homepage": "https://mate-academy.github.io/redux-thunk_todos-task/",
+  "homepage": ".",
   "name": "redux-thunk_todos-task",
   "version": "1.0.0",
   "private": true,
@@ -7,11 +7,13 @@
   "author": "Mate Academy",
   "license": "GPL-3.0",
   "dependencies": {
+    "@emotion/core": "^10.0.34",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-scripts": "3.0.1",
+    "react-spinners": "^0.9.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"
   },
