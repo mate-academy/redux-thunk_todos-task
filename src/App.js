@@ -1,152 +1,136 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
+import { css } from '@emotion/core';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CurrentUser from './CurrentUser';
 import TodoList from './TodoList';
-import { getTodos } from './api';
+import { clearTodos as clearStateTodos,
+  clearUser as clearStateUser,
+  loadTodos, loadUser } from './store';
 
-getTodos()
-  .then(todos => {
-    console.log(todos);
-  });
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border: 3px solid grey;
+`;
 
-const todos = [
-  {
-    userId: 1,
-    id: 1,
-    title: 'delectus aut autem',
-    completed: true,
-  },
-  {
-    userId: 2,
-    id: 2,
-    title: 'quis ut nam facilis et officia qui',
-    completed: false,
-  },
-  {
-    userId: 1,
-    id: 3,
-    title: 'fugiat veniam minus',
-    completed: false,
-  },
-  {
-    userId: 1,
-    id: 4,
-    title: 'et porro tempora',
-    completed: true,
-  },
-  {
-    userId: 4,
-    id: 5,
-    title: 'laboriosam mollitia et enim quasi adipisci quia provident illum',
-    completed: false,
-  },
-  {
-    userId: 1,
-    id: 6,
-    title: 'qui ullam ratione quibusdam voluptatem quia omnis',
-    completed: false,
-  },
-];
-const currentUser = {
-  id: 1,
-  name: 'Leanne Graham',
-  username: 'Bret',
-  email: 'Sincere@april.biz',
-  address: {
-    street: 'Kulas Light',
-    suite: 'Apt. 556',
-    city: 'Gwenborough',
-    zipcode: '92998-3874',
-    geo: {
-      lat: '-37.3159',
-      lng: '81.1496',
-    },
-  },
-  phone: '1-770-736-8031 x56442',
-  website: 'hildegard.org',
-  company: {
-    name: 'Romaguera-Crona',
-    catchPhrase: 'Multi-layered client-server neural-net',
-    bs: 'harness real-time e-markets',
-  },
+const App = () => {
+  const dispatch = useDispatch();
+  const { todos,
+    currentUser,
+    isLoading,
+    isLoaded,
+    hasError,
+    isLoadingUser } = useSelector(state => state);
+
+  const getTodos = () => {
+    dispatch(loadTodos());
+  };
+
+  const clearTodos = () => {
+    dispatch(clearStateTodos());
+  };
+
+  const showUser = (id) => {
+    dispatch(loadUser(id));
+  };
+
+  const clearUser = () => {
+    dispatch(clearStateUser());
+  };
+
+  return (
+    <main className="App">
+      <section>
+        {isLoading ? (<p className="info">Loading...</p>
+        ) : (
+          isLoaded ? (
+            hasError ? (
+              <p className="info">
+              Failed loading todos
+                <button type="button" onClick={getTodos}>Reload</button>
+              </p>
+            ) : (
+              <p className="info">
+                {todos.length}
+                {' '}
+                todos are loaded
+                <button type="button" onClick={clearTodos}>Clear</button>
+              </p>
+            )
+
+          ) : (
+            <p className="info">
+            Todos are not loaded yet
+              <button type="button" onClick={getTodos}>Load</button>
+            </p>
+          )
+        )}
+
+        {!Object.entries(currentUser).length ? (
+          <p className="info">User is not selected</p>
+        ) : (
+          <p className="info">
+          User #
+            {currentUser.id}
+            is loaded
+            <button type="button" onClick={clearUser}>Clear</button>
+          </p>
+        )}
+      </section>
+
+      {/* <section>
+
+        <p className="info">
+          Failed loading user
+          <button type="button">Reload</button>
+        </p>
+      </section>
+
+      <section>
+        <p className="info">
+          User #1 is loaded
+          <button type="button">Clear</button>
+        </p>
+      </section>
+
+      <section>
+        <p className="info">User #999 does not exist</p>
+      </section> */}
+
+      <section>
+        <div className="content">
+          {isLoading ? (
+            <ClipLoader
+              css={override}
+              size={50}
+              color="black"
+              loading={isLoading}
+            />
+          ) : (
+            isLoaded && !hasError ? (
+              <TodoList todos={todos} showUser={showUser} />
+            ) : (
+              <></>
+            ))}
+        </div>
+        <div className="content content--user">
+          {Object.entries(currentUser).length ? (
+            <CurrentUser user={currentUser} />
+          ) : (
+            <ClipLoader
+              css={override}
+              size={50}
+              color="black"
+              loading={isLoadingUser}
+            />
+          )}
+        </div>
+      </section>
+    </main>
+  );
 };
-
-const App = () => (
-  <main className="App">
-    <section>
-      <p className="info">
-        Todos are not loaded yet
-        <button type="button">Load</button>
-      </p>
-
-      <p className="info">User is not selected</p>
-    </section>
-
-    <section>
-      <p className="info">Loading...</p>
-      <p className="info">Loading...</p>
-    </section>
-
-    <section>
-      <p className="info">
-        Failed loading todos
-        <button type="button">Reload</button>
-      </p>
-
-      <p className="info">
-        Failed loading user
-        <button type="button">Reload</button>
-      </p>
-    </section>
-
-    <section>
-      <p className="info">
-        6 todos are loaded
-        <button type="button">Clear</button>
-      </p>
-
-      <p className="info">
-        User #1 is loaded
-        <button type="button">Clear</button>
-      </p>
-    </section>
-
-    <section>
-      <p className="info">
-        1 todo is loaded
-        <button type="button">Clear</button>
-      </p>
-
-      <p className="info">User #999 does not exist</p>
-    </section>
-
-    <section>
-      <div className="content">
-        <p>-</p>
-      </div>
-      <div className="content">
-        <p>-</p>
-      </div>
-    </section>
-
-    <section>
-      <div className="content">
-        <div className="loader" />
-      </div>
-      <div className="content">
-        <CurrentUser user={currentUser} />
-      </div>
-    </section>
-
-    <section>
-      <div className="content">
-        <TodoList todos={todos} />
-      </div>
-      <div className="content">
-        <div className="loader" />
-      </div>
-    </section>
-  </main>
-);
 
 export default App;
